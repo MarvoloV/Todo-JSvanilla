@@ -2,8 +2,10 @@ import { todoList } from "..";
 import { Todo, TodoList } from "../classes";
 
 //referencias en el Html
-const divTodoList= document.querySelector('.todo-list');
-const txtInput   = document.querySelector('.new-todo');
+const divTodoList            = document.querySelector('.todo-list');
+const txtInput               = document.querySelector('.new-todo');
+const btnBorrarCompletados   = document.querySelector('.clear-completed');
+
 export const crearTodoHtml=(todo)=>{
     const htmlTodo =/*html*/ `
         <li class="${(todo.completado)?'completed':''}" data-id="${todo.id}">
@@ -40,6 +42,19 @@ divTodoList.addEventListener('click',(event)=>{
     if (nombreElemento.includes('input')) {
         todoList.marcarCompletado(todoId);
         todoElemento.classList.toggle('completed');
+    }else if(nombreElemento.includes('button')){
+        todoList.eliminarTodo(todoId);
+        divTodoList.removeChild(todoElemento);
     }
     console.log(todoList);
+});
+btnBorrarCompletados.addEventListener('click',()=>{
+    todoList.eliminarCompletados();
+    console.log(todoList);
+    for (let i = divTodoList.children.length-1; i >=0; i--) {
+        const elemento= divTodoList.children[i];
+        if (elemento.classList.contains('completed')) {
+            divTodoList.removeChild(elemento);
+        }
+    }
 })
