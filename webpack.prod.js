@@ -2,11 +2,12 @@ const HtmlWebPackPlugin       = require('html-webpack-plugin');
 const MiniCssExtractPlugin    = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
-
+const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
     mode: 'production',
     optimization: {
-        minimizer: [ new CssMinimizerPlugin() ]
+        minimize: true,
+        minimizer: [ new CssMinimizerPlugin(),new TerserPlugin() ]
     },
     output: {
         filename: 'main.[contentHash].js'
@@ -48,16 +49,8 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            esModule: false,
-                            name: 'assets/[name].[ext]'
-                        }
-                    }
-                ]
+                test: /\.(png|svg|jpg|gif)$/,               
+                type:'asset/resource'
             }
         ]
     },
