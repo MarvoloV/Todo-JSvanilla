@@ -8,8 +8,6 @@ const btnBorrarCompletados   = document.querySelector('.clear-completed');
 const ulFilters              = document.querySelector('.filters') ;
 const ancorFiltros           = document.querySelectorAll('.filtro') ;
 const spanTodoCount          = document.querySelector('.todo-count') ;
-/* spanTodoCount.firstChild=todoList */
-
 export const actualizarPendientes= ()=>{
     spanTodoCount.firstChild.innerText=todoList.pendientes();
 }
@@ -38,7 +36,6 @@ txtInput.addEventListener('keyup', (event)=>{
         todoList.nuevoTodo(nuevoTodo);
         crearTodoHtml(nuevoTodo);
         txtInput.value='';
-        console.log(todoList);
         actualizarPendientes();
     }
 });

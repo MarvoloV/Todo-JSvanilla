@@ -1,8 +1,9 @@
 import {Todo} from './todo.class';
 export class TodoList{
     constructor(){
-        this.cargarLocalStorage();
-        this.pendientes();
+        this.todos=[];
+         this.cargarLocalStorage();
+         this.pendientes(); 
     }
     nuevoTodo(todo){
         this.todos.push(todo);
@@ -31,7 +32,6 @@ export class TodoList{
     cargarLocalStorage(){
       this.todos=(localStorage.getItem('todo'))?JSON.parse(localStorage.getItem('todo')):[];
       this.todos= this.todos.map(Todo.fromJson);
-      console.log(this.todos);
     }
     pendientes(){
         let count=0;
